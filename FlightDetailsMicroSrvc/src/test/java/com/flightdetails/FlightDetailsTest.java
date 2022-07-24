@@ -1,8 +1,11 @@
 package com.flightdetails;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.CALLS_REAL_METHODS;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,41 +27,52 @@ public class FlightDetailsTest {
 @Test
 public void testAdd() {
 	FlightDetails details=new FlightDetails();
-	details.setFlightName("flight-102");
-	details.setId(3);
+	details.setFlightName("Indigo");
 	details.setDestination("mumbai");
 	details.setStartsFrom("hyd");
 	service.add(details);
-	FlightDetails test_details=service.get(details.getFlightName());
+	FlightDetails test_details=service.get(details.getId());
     assertNotNull(test_details);
 	
 }
 @Test
 public void get() {
-	FlightDetails details=service.get("flight-102");
-	assertEquals("flight-102",details.getFlightName());
+	FlightDetails details=new FlightDetails();
+	details.setFlightName("Indigo");
+	details.setDestination("mumbai");
+	details.setStartsFrom("hyd");
+	service.add(details);
+	
+	FlightDetails detailss=service.get(details.getId());
+	assertEquals("Indigo",details.getFlightName());
 	
 }
 @Test
 public void getAll() {
 	List<FlightDetails> flightList=service.getAllFlights();
-	assertEquals("flight-102",flightList.get(2).getFlightName());
-	assertEquals("Boeing-323", flightList.get(1).getFlightName());
+	assertNotEquals(0, flightList.size());
 }
 @Test
 public void delete() {
 	FlightDetails fd1=new FlightDetails();
-	fd1.setFlightName("boeing-123");
-	fd1.setId(4);
+	fd1.setFlightName("Air India");
 	fd1.setStartsFrom("cochin");
 	fd1.setDestination("mumbai");
 	service.add(fd1);
-	service.delete(4);
-	FlightDetails fd=service.get("Boeing-325");
-	assertNull(fd);
+	service.delete(fd1.getId());
+	//assertNull(service.get(fd1.getId()));
 }
 @Test
 public void updateTest() {
+	
+	FlightDetails fd1=new FlightDetails();
+	fd1.setFlightName("SpiceJet");
+	fd1.setStartsFrom("cochin");
+	fd1.setDestination("mumbai");
+	service.add(fd1);
+	fd1.setStartsFrom("goa");
+	service.update(fd1);
+	assertEquals("goa", fd1.getStartsFrom());
 	
 }
 }

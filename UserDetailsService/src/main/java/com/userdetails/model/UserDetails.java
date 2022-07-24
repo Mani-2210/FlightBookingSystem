@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class UserDetails {
 	private String firstName;
 	private String lastName;
+	private String role="user";
 	@Id
 	private String email;
 	private String password;

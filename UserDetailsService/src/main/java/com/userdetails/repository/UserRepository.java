@@ -6,4 +6,6 @@ import com.userdetails.model.UserDetails;
 
 public interface UserRepository extends MongoRepository<UserDetails, String> {
   UserDetails findByEmail(String email);
+
+ UserDetails findByFirstName(String username);
 }

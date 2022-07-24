@@ -1,9 +1,9 @@
 package com.bookingdetails.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.bookingdetails.model.BookingDetails;
 
-public interface BookingRepository extends JpaRepository<BookingDetails, Integer> {
+public interface BookingRepository extends MongoRepository<BookingDetails, String> {
 
 }

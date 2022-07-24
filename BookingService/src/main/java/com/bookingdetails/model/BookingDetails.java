@@ -2,26 +2,36 @@ package com.bookingdetails.model;
 
 import java.util.Date;
 
-import javax.persistence.Table;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Table
+@Document
 public class BookingDetails {
 	@Id
-	private int id;
+	private String id;
 	private String firstName;
 	private String lastName;
-	private Date dateOfTravel;
+	private String gender;
+	private String flightId;
+	
+
+	public String getFlightName() {
+		return flightId;
+	}
+
+	public void setFlightName(String flightName) {
+		this.flightId = flightName;
+	}
 
 	public BookingDetails() {
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
@@ -41,20 +51,12 @@ public class BookingDetails {
 		this.lastName = lastName;
 	}
 
-	public Date getDateOfTravel() {
-		return dateOfTravel;
+	public String getGender() {
+		return gender;
 	}
 
-	public void setDateOfTravel(Date dateOfTravel) {
-		this.dateOfTravel = dateOfTravel;
-	}
-
-	public BookingDetails(int id, String firstName, String lastName, Date dateOfTravel) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.dateOfTravel = dateOfTravel;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 }
